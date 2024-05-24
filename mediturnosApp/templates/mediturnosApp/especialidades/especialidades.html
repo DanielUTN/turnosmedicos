@@ -1,0 +1,59 @@
+{% extends "../base.html" %}
+{% block titulo %}Especialidades{% endblock %}
+
+
+{% load static %}
+
+{% block titulo_principal %}Especialidades que se atienden:{% endblock %}
+
+
+{% block principal %}
+{% comment %}
+Desde la vista especialidades se redirige a esta template 
+y nos envia una lista con diferentes especialidades medicas
+esa lista llega con el nombre: especialidades
+{% endcomment %}
+   
+<h4 class="cantidad-medicos">{{especialidades.count}} especialidades</h3>
+{% comment %} listamos cada una de las especialidades de la lista {% endcomment %}
+    {% if user.is_authenticated and especialidades.count == 0 %}
+        <img class="card-img-top gif-cargue-especialidad" src="{% static 'mediturnosApp/img/cargue-especialidad.gif' %}" alt="Cargando...">
+    {% endif %}
+<br>
+<div class="card-especialidad table-responsive">
+    <table class="table table-striped tabla">
+        <tbody>
+        {% for especialidad in especialidades %}
+        
+            <tr>
+                <td>
+                    <img class="especialidad-imagen" src="{{ especialidad.imagen.url }}" class="img-fluid" height="110"/>
+                </td>
+            
+                <td>
+                        <!-- <div class="especialidad-titulo"> -->
+                    <h3 class="especialidad-titulo" >{{ especialidad.nombre }}</h2>
+                        <!-- </div> -->
+                </td>
+            
+                <td class="especialidad-descripcion">
+                    <!-- <div class="especialidad-descripcion"> -->
+                    <h4> {{ especialidad.descripcion }} </h4>
+                    <!--<br><a class="texto-ver-medicos" href="#">Ver médicos</a>-->
+                    <br><a class="texto-ver-medicos" href="{% url 'medicos-listado-por-especialidad' especialidad.id %}">Ver médicos</a>
+                    <!-- </div> -->
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+    
+  <!-- </ul>  -->
+
+{% endblock %}
+{% block fecha %} 
+    {{ block.super }}
+{% endblock %}

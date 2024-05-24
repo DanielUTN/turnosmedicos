@@ -1,0 +1,44 @@
+{% extends "../base.html" %}
+{% block titulo %}Alta de un nuevo médico{% endblock %}
+
+{% load static %}
+
+
+
+{% block titulo_principal %}Alta de médico{% endblock %}
+{% block principal %}
+
+<div class="contenedor-turnos">
+    
+</div>
+    {% if cantidad_especialidades == 0 %}
+        
+        <img class="card-img-top gif-cargue-especialidad" src="{% static 'mediturnosApp/img/cargue-especialidad.gif' %}" alt="Cargando...">
+
+    {% else %}
+        <div class="formulario row">
+            
+            <br>
+            <h3 class="text-center"> Ingrese los datos del nuevo médico: </h3>
+            <br>
+            <form method="POST" action=" {% url 'medicos-alta' %} " class="col-12 col-md-6">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" id="boton-enviar" class="btn btn-primary container">Enviar</button>
+            </div>
+
+            </form>
+            <br>
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}
+{% block fecha %} 
+    {{ block.super }}
+{% endblock %}

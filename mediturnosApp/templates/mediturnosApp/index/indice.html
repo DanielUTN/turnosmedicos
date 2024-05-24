@@ -1,0 +1,37 @@
+{% extends "../base.html" %}
+{% block titulo%} Mediturnos{% endblock %}
+
+{% load static %}
+
+{% block titulo_principal %}Bienvenido a Mediturnos®{% endblock %}
+
+
+{% block principal %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="contenedor">
+<section class="carrusel-contenido">
+    <div class="carrusel-caja">
+         <div class="carrusel-elemento">   
+            <img src="{% static 'mediturnosApp/img/imagen1.jpg' %}" alt="Mediturnos">
+        </div>
+        <div class="carrusel-elemento">   
+            <img src="{% static 'mediturnosApp/img/imagen2.jpg' %}" alt="Mediturnos">
+        </div>
+        <div class="carrusel-elemento">
+            <img src="{% static 'mediturnosApp/img/imagen3.jpg' %}" alt="Mediturnos">
+        </div>    
+    </div>
+</section>
+</div>
+<!-- <div class="contenedor">
+    <div class="div-imagen-frente">
+        <img src="{% static 'mediturnosApp/img/imagen1.jpg' %}" alt="Mediturnos">
+    </div>
+</div> -->
+{% endblock %}

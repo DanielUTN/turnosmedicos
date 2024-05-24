@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+{% block titulo %}Medicos para {{ especialidad_nombre }}{% endblock %}
+{% load static %}
+
+{% block titulo_principal %}Medicos para especialidad : {{ especialidad_nombre }}{% endblock %}
+{% block principal %}
+
+        
+    {% if medicos.count == 1 %}
+        <h4 class="cantidad-medicos">{{medicos.count}} médico</h3>
+    {% else %}
+        <h4 class="cantidad-medicos">{{medicos.count}} médicos</h3>
+    {% endif %}
+
+   <br>
+        <div class="container-card">
+            <ul class="card-list">
+              {% for medico in medicos %}
+                <li class="card-item  medicos-nuevos-tarjetas">
+                    <div class="card pt-2">
+                        {% if medico.especialidades.count > 1 %}
+                            <img class="card-img-top medicos-nuevos-img medicomultiple" src="{% static 'mediturnosApp/img/especialidad-multiple.png' %}" alt="Especialidad Predeterminada">
+                        {% else %}
+                            <img class="card-img-top medicos-nuevos-img" src="{{ medico.especialidades.first.imagen.url }}" alt="Especialidad">
+                        {% endif %}
+                        
+                        <div class="card-body">
+                            <h5 class="card-title text-center mt-4">{{ medico.nombre_completo }}</h5>
+                        </div>
+                        <div class="card-footer w-100 text-center">
+                            <small class="text-muted">Matricula N°: {{ medico.matricula }}</small>
+                        </div>
+                    </div>
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+    <p class="fecha"> {{ fecha }} </p>
+    
+{% endblock %}
+
+

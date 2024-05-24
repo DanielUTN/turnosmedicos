@@ -1,0 +1,46 @@
+{% extends "../base.html" %}
+{% block titulo %}Iniciar Sesión{% endblock %}
+
+{% load static %}
+
+{% block titulo_principal %}Inicio de sesión para pacientes{% endblock %}
+
+{% block principal %}
+
+    <div class="formulario row ">
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form class="container-login col-12 col-md-6" method="POST" action=" {% url 'login' %} "> 
+            {% csrf_token %}
+            <h2 class="mb-5">Ingresa tus datos para iniciar sesión en Mediturnos®</h2>
+            <input class="input-inicio-sesion" type="text" name="username" placeholder="Ingresa tu nombre de usuario">
+            <div class="input-password">
+                <input class="input-inicio-sesion" type="password" name="password" placeholder="Contraseña" id="ingresodecontraseña">
+                <button class="btn-hide-show">
+                    <i id="show-password" class="fa-solid fa-eye"></i><i id="hide-password" class="fa-solid fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <button type="submit" class="btn-sign-in">
+                Iniciar sesión                
+            </button>
+        
+            <p class="create-account">
+                ¿No tienes una cuenta?  <a href="{% url 'pacientes-alta' %}">Regístrate ahora</a>
+            </p>
+        </form>
+    </div>
+    <script src="https://kit.fontawesome.com/e808169f4d.js" crossorigin="anonymous"></script>   
+     
+{% endblock %}
+
+{% block fecha %} 
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "../base.html" %}
+{% block titulo %}Agenda{% endblock %}
+
+{% load static %}
+
+
+{% block titulo_principal %}Agenda de turnos{% endblock %}
+
+
+{% block principal %}
+    <table class="table caption-top">
+        <thead>
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Médico</th>
+            <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if datos_turnos|length == 0 %}
+                <p>No hay turnos asignados.</p>
+            {%else%}
+                {% for turno in datos_turnos %}
+                    <tr>
+                        <td>{{turno.fecha}}</td>
+                        <td>{{turno.hora}}</td>
+                        <td>{{turno.nombre_medico}}</td>
+                        <td>{{turno.cancelado}}</td>
+                    </tr>
+                {% endfor %}
+            {%endif%}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block fecha %} 
+    {{ block.super }}
+{% endblock %}
